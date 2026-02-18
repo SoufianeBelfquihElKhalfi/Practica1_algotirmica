@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,35 +8,56 @@ namespace Torres_de_Hanoi
 {
     class Pila
     {
-        public int Size { get; set; }
-        /* TODO: Elegir tipo de Top
-        public int Top { get; set; }
-        public String Top { get; set; }        
-        */
-        /* TODO: Elegir tipo de Elementos
-        public Disco[] Elementos { get; set; }
-        public List<Disco> Elementos { get; set; }
-        */
 
-        /* TODO: Implementar métodos */
+        // 1. Atributos / Propiedades requeridas
+
+        // Representa la cantidad de discos actuales en el palo
+        public int Size { get; private set; }
+
+        // Representa el disco que está en la parte superior
+        public Disco Top { get; private set; }
+
+        // Estructura que contiene el conjunto de discos
+        public List<Disco> Elementos { get; private set; }
+
+
+        // 2. Métodos obligatorios
+
+        // Constructor que inicializa la pila
         public Pila()
         {
-
+            Elementos = new List<Disco>();
+            Size = 0;
+            Top = null;
         }
 
+        // Coloca un disco en la parte superior
         public void push(Disco d)
         {
-
+            Elementos.Add(d);
+            Size++;
+            Top = d;
         }
 
+        // Extrae y devuelve el disco de la parte superior
         public Disco pop()
         {
-            return null;
-        }                
+            if (isEmpty())
+                return null;
 
+            Disco discoSuperior = Elementos[Size - 1];
+            Elementos.RemoveAt(Size - 1);
+            Size--;
+
+            Top = isEmpty() ? null : Elementos[Size - 1];
+
+            return discoSuperior;
+        }
+
+        // Devuelve true si la pila no tiene discos
         public bool isEmpty()
         {
-            return true;
+            return Size == 0;
         }
 
     }
