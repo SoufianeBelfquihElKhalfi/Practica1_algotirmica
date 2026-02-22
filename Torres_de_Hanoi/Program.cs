@@ -27,8 +27,24 @@ namespace Torres_de_Hanoi
             // 2. Input de Discos
             Console.Write("Indica el número de discos... ");
 
+            // 2. Input de Discos con validación robusta
             int numeroDiscos;
-            numeroDiscos = int.Parse(Console.ReadLine());
+            while (true)
+            {
+                Console.Write("Indica el número de discos (mínimo 1)... ");
+                string entrada = Console.ReadLine();
+
+                // TryParse intenta convertir el texto a número. 
+                // Devuelve 'true' si lo logra y guarda el resultado en 'numeroDiscos'.
+                if (int.TryParse(entrada, out numeroDiscos) && numeroDiscos > 0)
+                {
+                    break; // Salimos del bucle porque el dato es válido
+                }
+
+                Console.WriteLine("⚠️ Entrada no válida. Por favor, introduce un número entero mayor a 0.");
+            }
+
+            Console.WriteLine($"\nHas seleccionado {numeroDiscos} discos. ");
 
             Console.WriteLine("\nPreparando discos...");
             for (int i = numeroDiscos; i >= 1; i--)
@@ -38,7 +54,7 @@ namespace Torres_de_Hanoi
                 Console.WriteLine($"Disco de tamaño {i} agregado a la torre inicial");
             }
 
-            Console.WriteLine("Has seleccionado " + numeroDiscos + " discos");
+            
 
 
 
